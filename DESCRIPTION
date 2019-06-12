@@ -2,7 +2,7 @@ Package: earthfish
 Type: Package
 Title: Fisheries operating model
 Description: Fisheries simulation model linked to the assessment model CASAL.
-Version: 0.1.0
+Version: 0.1.1
 Date: 2019-06-12
 Author: Philippe Ziegler, Paul Burch, and Brett Stacy
 Maintainer: Brett Stacy <Brett.Stacy@utas.edu.au>
