@@ -16,6 +16,7 @@ get_om_data <- function(){
 	### Control Parameters of Simulations
 	ctrl$assess_type <- "CASAL"
 	ctrl$pin_casal_assess <- 1		# Run function 'run_complete_casal_assessment': Run CASAL assessment (1=yes, 0=no)
+	ctrl$pin_save_datass <- 1		# Save datass object just before input to CASAL files? (1=yes, 0=no)
 	ctrl$pin_update_casal_data <- 0		# In function 'run_complete_casal_assessment': Update casal data (1=yes, 0=no), used for scenario testing
 	ctrl$pin_TAC_finder <- 1		# In function 'run_complete_casal_assessment': Run TAC finder after CASAL assessment (1=yes, 0=no)
 	ctrl$pin_TAC_finder_om <- 0		# Run om_projection to find real TAC in final assessment year (1=yes, 0=no)
