@@ -599,7 +599,7 @@ run_annual_om <- function(para, res, intern = TRUE) {
 		             # Update casal data if needed for running scenarios
 		             if(ctrl$pin_update_casal_data == 1) datass <- update_casal_data(datass=datass, Yr_current=om$years[y])
 		             # Save datass object for inspection if desired (1=yes, 0=no)
-		             if(ctrl$pin_save_datass == 1 & i_iter == 1) saveRDS(datass, file = paste0(ctrl$casal_path, "datass"))
+		             if(ctrl$pin_save_datass == 1 & i_iter == 1) saveRDS(datass, file = paste0(ctrl$casal_path, "datass.Rds"))
 		             ## Create CASAL input files
 		             create_casal_file_est(params=datass, casal_path=ctrl$casal_path, skel_csl=ctrl$est_skel_csl, csl=ctrl$est_csl)
 		             create_casal_file_pop(params=datass, casal_path=ctrl$casal_path, skel_csl=ctrl$pop_skel_csl, csl=ctrl$pop_csl)
