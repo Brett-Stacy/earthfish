@@ -619,11 +619,11 @@ get_casal_data <- function(datass, Yr_current, om, sampling, obs, tag, mod) {
 			datass$scannedN[[revent]] <- scannedN
 		}
 	}
-	#### Estimation file: Estimated Parameters
-	datass$estim_recruitment.YCS[[2]] <- c(rep(0.001, datass$rec_year_range_N),rep(1,length(datass$rec_YCS)-datass$rec_year_range_N))
-	datass$estim_recruitment.YCS[[3]] <- c(rep(  100, datass$rec_year_range_N),rep(1,length(datass$rec_YCS)-datass$rec_year_range_N))
-	datass$estim_recruitment.YCS[[6]] <- rep(1, length(datass$rec_YCS))			# mu
-	datass$estim_recruitment.YCS[[7]] <- rep(1.0, length(datass$rec_YCS))			# cv
+	# #### Estimation file: Estimated Parameters. BS 17/6/19: don't over-write YCS stuff, enter it according to datass$YCS...
+	# datass$estim_recruitment.YCS[[2]] <- c(rep(0.001, datass$rec_year_range_N),rep(1,length(datass$rec_YCS)-datass$rec_year_range_N))
+	# datass$estim_recruitment.YCS[[3]] <- c(rep(  100, datass$rec_year_range_N),rep(1,length(datass$rec_YCS)-datass$rec_year_range_N))
+	# datass$estim_recruitment.YCS[[6]] <- rep(1, length(datass$rec_YCS))			# mu
+	# datass$estim_recruitment.YCS[[7]] <- rep(1.0, length(datass$rec_YCS))			# cv
 	#### Output file: Parameters
 	for (ee in 1:length(datass$regions)) {
 		Natage	<- paste("numbers_at[Numbers_at_age_",datass$regions[ee],"]",sep="")
