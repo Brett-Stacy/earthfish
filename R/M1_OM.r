@@ -575,13 +575,13 @@ run_annual_om <- function(para, res, intern = TRUE) {
 													                 prob1 = half_natM_shedding)	# Probabilities
 				tag$tags[,y,,ss,,,][tag$tags[,y,,ss,,,] < 0] <- 0	# Safeguard that tag$tags > 0
 			}
-			## Store SSB and TotB (end of year). BS 17/6/19: try to calc SSB after all natM to agree with casal SSB
-			for (rr in 1:om$n_regions) {
-			  for (i in 1:length(om$sex)){
-			    mod$totB[,y,i,ss,rr] <- sum(pop$n[,y,i,ss,rr] * (1-0.5*mod$h_species[,y,i,ss,rr]) * pop$wt[,y,i,ss,rr])
-			    mod$ssb[,y,i,ss,rr] <- sum(pop$n[,y,i,ss,rr] * (1-0.5*mod$h_species[,y,i,ss,rr]) * pop$wt[,y,i,ss,rr] * pop$fec[,y,i,ss,rr])
-			  }
-			}
+			# ## Store SSB and TotB (end of year). BS 17/6/19: try to calc SSB after all natM to agree with casal SSB
+			# for (rr in 1:om$n_regions) {
+			#   for (i in 1:length(om$sex)){
+			#     mod$totB[,y,i,ss,rr] <- sum(pop$n[,y,i,ss,rr] * (1-0.5*mod$h_species[,y,i,ss,rr]) * pop$wt[,y,i,ss,rr])
+			#     mod$ssb[,y,i,ss,rr] <- sum(pop$n[,y,i,ss,rr] * (1-0.5*mod$h_species[,y,i,ss,rr]) * pop$wt[,y,i,ss,rr] * pop$fec[,y,i,ss,rr])
+			#   }
+			# }
 			if(sampling$pin_tag_Method == "Ind" & sum(tag$iTags[,"RelY"]) > 0) { 	# Individual tags (with records)
 				liveT <- which(tag$iTags[,"Dead"] == 0)
 				tag$iTags[liveT,] <- 	iTags_M(dat = tag$iTags[liveT,], # Data
