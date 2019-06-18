@@ -36,13 +36,13 @@ calc_SSB = function(type, age_data, VB_params, WL_params, M_ogive, M_params){
   switch(type,
          res = {
            wt  <- calc_VBweight2(as.numeric(rownames(age_data)), VB_params, WL_params); # calc weight from calc_VBweight
-           m   <- ogive(type = M_ogive, ages = as.numeric(rownames(age_data)), params = M_params[-1]);
+           m   <- ogive(type = M_ogive, ages = as.numeric(rownames(age_data)), params = M_params);
            wtm <- wt*m;
            SSB <- colSums(sweep(age_data, 1, wtm, "*"))
          },
          output_log = {
            wt  <- calc_VBweight2(seq(1, length(age_data[[1]])), VB_params, WL_params); # calc weight from calc_VBweight
-           m   <- ogive(type = M_ogive, ages = seq(1, length(age_data[[1]])), params = M_params[-1]);
+           m   <- ogive(type = M_ogive, ages = seq(1, length(age_data[[1]])), params = M_params);
            wtm <- wt*m;
            SSB <- unlist(lapply(lapply(age_data, "*", wtm), sum))
          })
