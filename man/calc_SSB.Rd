@@ -4,18 +4,20 @@
 \alias{calc_SSB}
 \title{Calculate SSB}
 \usage{
-calc_SSB(type, age_data, VB_params, WL_params, M_params)
+calc_SSB(type, age_data, VB_params, WL_params, M_ogive, M_params)
 }
 \arguments{
 \item{type}{Type of object. One of c("res", "output_log").}
 
 \item{age_data}{Object containting age frequency data.}
 
-\item{VB_params}{= vector containing parameters for length at age relationship, Von-Bertalanffy.}
+\item{VB_params}{vector containing parameters for length at age relationship, Von-Bertalanffy.}
 
-\item{WL_params}{= list containing parameters for weight at length relationship.}
+\item{WL_params}{list containing parameters for weight at length relationship.}
 
-\item{M_params}{= list containing parameters for the maturity at age relationship.}
+\item{M_ogive}{type of ogive the maturity follows, probably "logistic".}
+
+\item{M_params}{list containing parameters for the maturity at age relationship.}
 }
 \value{
 Returns a time series of SSB

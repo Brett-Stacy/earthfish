@@ -27,9 +27,10 @@ calc_VBweight2 <- function(age1,params1,params2) {
 #' The input data can be from the OM res object or from the casal output log.
 #' @param type Type of object. One of c("res", "output_log").
 #' @param age_data Object containting age frequency data.
-#' @param VB_params = vector containing parameters for length at age relationship, Von-Bertalanffy.
-#' @param WL_params = list containing parameters for weight at length relationship.
-#' @param M_params = list containing parameters for the maturity at age relationship.
+#' @param VB_params vector containing parameters for length at age relationship, Von-Bertalanffy.
+#' @param WL_params list containing parameters for weight at length relationship.
+#' @param M_ogive type of ogive the maturity follows, probably "logistic".
+#' @param M_params list containing parameters for the maturity at age relationship.
 #' @return Returns a time series of SSB
 #' @export
 calc_SSB = function(type, age_data, VB_params, WL_params, M_ogive, M_params){
