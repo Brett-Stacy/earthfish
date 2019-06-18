@@ -50,11 +50,12 @@ calc_SSB = function(type, age_data, VB_params, WL_params, M_ogive, M_params){
 
   return(SSB)
 }
-# VB_params = c(1565, 0.146, 0.015, 0.122)
-# WL_params = list(a = 3.0088e-12, b = 3.2064)
-# M_params  = list("logistic", x50 = 14.45, x95 = 6.5)
-# age_data = res.TOA$pop$n[,,1,,]*2
-# age_data = output.TOA$Numbers_at_age_R1
+VB_params = c(1565, 0.146, 0.015, 0.122)
+WL_params = list(a = 3.0088e-12, b = 3.2064)
+M_ogive   = "logistic"
+M_params  = list(x50 = 14.45, x95 = 6.5)
+age_data = res.TOA$pop$n[,,1,,]*2
+age_data = output.TOA$Numbers_at_age_R1
 
 
 
