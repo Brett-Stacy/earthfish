@@ -429,7 +429,8 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 	# datass$years <- seq(datass$year[1],datass$year[2])					# Sequence of all years
 	datass$year <- c(ctrl$Assyr_range[1], Yr_current, length(seq(ctrl$Assyr_range[1], ctrl$Assyr_range[2])))	# first, current, which year in om
 	datass$years <- seq(datass$year[1], datass$year[2])				# Sequence of all years
-	yrs <- 1:datass$year[3]										# Used to define years in some arrays below
+	# yrs <- 1:datass$year[3]										# Used to define years in some arrays below
+	yrs = (om$n_years - datass$year[3]):om$n_years # BS 24/06/19: add because of problem in create_casal_pop with new years
 	ycurr <- which(datass$years==datass$Yr_current)				# Number of current year
 	## Update recruitment years
 	datass$rec_YCS_years <- datass$years - datass$rec_y_enter				# Years for which YCS are provided
