@@ -573,12 +573,14 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 	for (ff in 1:nrow(tag_names)) {
 		# Retrieve Tagging year and area
 		tyear	<- as.numeric(tag_names[ff,"Year"])
-		tyy	<- which(datass$years  %in% tyear)			# Year number
+		# tyy	<- which(datass$years  %in% tyear)			# Year number
+		tyy = which(om$years %in% tyear) # BS 25/06/19 change to om$years for extracting correct period from tag$recaps_len below
 		treg <- tag_names[ff,"Region"]
 		tr_om <- unique(datass$match_region["OM",] [datass$match_region["Ass",] %in% treg])
 		# Define years of recaptures: (tyear+1):(tyear+datass$tag_y_liberty)
 		ryear <- (tyear+1) : min(tyear+datass$tag_y_liberty,(datass$year[2]))
-		ryy <- which(datass$years %in% ryear)			# Year number
+		# ryy <- which(datass$years %in% ryear)			# Year number
+		ryy = which(om$years %in% ryear) # BS 25/06/19 change to om$years for extracting correct period from tag$recaps_len below
 		# For each recapture area in the assessment:
 		for (rr in 1:length(datass$regions)){					# rr = Assessment Recapture regions
 			# Determine equivalent om regions
