@@ -21,6 +21,7 @@ get_om_data <- function(){
 	ctrl$pin_TAC_finder <- 1		# In function 'run_complete_casal_assessment': Run TAC finder after CASAL assessment (1=yes, 0=no)
 	ctrl$pin_TAC_finder_om <- 0		# Run om_projection to find real TAC in final assessment year (1=yes, 0=no)
 	ctrl$Assyr <- seq(2010,2010,2)		# Years with assessments e.g. seq(2010,2044,2)
+	ctrl$Assyr_range = c(1998, 2018) # BS 24/06/19 added to accomodate ass years not equal to om years
 	# casal_path <- rootdir	# Full path (e.g. rootdir and subdirectory) for CASAL files (can be in separate folder)
 	ctrl$casal_path <- ""
 	ctrl$inputprefix <- "casal_"

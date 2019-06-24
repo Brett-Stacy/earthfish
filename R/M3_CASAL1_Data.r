@@ -8,14 +8,16 @@
 #' @export
 get_casal_para <- function(para) {
   # extract the om and sampling parameters
+  ctrl = para[["control"]]
 	om <- para[["om"]]
 	sampling <- para[["sampling"]]
 	### Create file with all input data (to be read into CASAL population file)
 	datass <- list()
 	#### Define general model parameters
-	Yr_last <- om$year[2]		# Default assessment year is final year of om period (eg. 2010)
-	datass$year <- c(om$year[1],Yr_last,which(om$years==Yr_last))	# first, current, which year in om
-	datass$years <- seq(datass$year[1],datass$year[2])				# Sequence of all years
+	# Yr_last <- om$year[2]		# Default assessment year is final year of om period (eg. 2010)
+	Yr_last = ctrl$Assyr # BS 24/06/19 added to accomodate ass years not equal to om years
+	datass$year <- c(ctrl$Assyr_range[1], Yr_last, length(seq(ctrl$Assyr_range[1], ctrl$Assyr_range[2])))	# first, current, which year in om
+	datass$years <- seq(datass$year[1], datass$year[2])				# Sequence of all years
 
 	yrs <- 1:datass$year[3]									# Used to define years in some arrays below
 	datass$age <- om$age
