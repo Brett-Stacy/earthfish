@@ -610,7 +610,7 @@ run_annual_om <- function(para, res, intern = TRUE) {
 		             print("")
 		             print(paste("CASAL Assessment in year ", om$years[y], sep=""))
 		             ## Update assessment parameters and add input data
-		             datass <- get_casal_data(Yr_current=om$years[y], datass=datass, om=om, sampling=sampling, obs=obs, tag=tag, mod=mod)
+		             datass <- get_casal_data(Yr_current=om$years[y], datass=datass, om=om, ctrl=ctrl, sampling=sampling, obs=obs, tag=tag, mod=mod)
 		             # Update casal data if needed for running scenarios
 		             if(ctrl$pin_update_casal_data == 1) datass <- update_casal_data(datass=datass, Yr_current=om$years[y])
 		             # Save datass object for inspection if desired (1=yes, 0=no)
