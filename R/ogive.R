@@ -32,8 +32,9 @@
 ogive <- function(type, ages, params){
   ## checks
   ## define valid ogives, remember to add new ogives below
-  valid_ogives <- c("logistic", "ramp", "dbnormal", "dbplateaunormal", "dbramp",
-                    "provide")
+  # valid_ogives <- c("logistic", "ramp", "dbnormal", "dbplateaunormal", "dbramp",
+  #                   "provide")
+  valid_ogives = c("logistic", "ramp", "double_normal", "double_normal_plateau", "dbramp", "provide")
   ## do some checks on res
   if(!type %in% valid_ogives)
     stop(paste0("supplied ogive type must be one of ", valid_ogives))
@@ -52,8 +53,8 @@ ogive <- function(type, ages, params){
                          round(seq(0,1,length.out=(params[["peak"]] -
                                                      params[["start"]] + 1)),4),
                          rep(1,ages[length(ages)]-params[["peak"]])),
-         dbnormal = res <- 2^(-(((ages-params[["top"]])/ifelse(ages <= params[["top"]],params[["sigma_left"]],params[["sigma_right"]]))^2)),
-         dbplateaunormal = res <- ifelse(ages <= params[["a1"]],
+         double_normal = res <- 2^(-(((ages-params[["top"]])/ifelse(ages <= params[["top"]],params[["sigma_left"]],params[["sigma_right"]]))^2)),
+         double_normal_plateau = res <- ifelse(ages <= params[["a1"]],
                                          2^(-(((ages-params[["a1"]])/params[["sigma_left"]])^2)),
                                          ifelse(ages > (params[["a1"]]+params[["a2"]]),
                                                 2^(-(((ages-(params[["a1"]]+params[["a2"]]))/params[["sigma_right"]])^2)),1)),
