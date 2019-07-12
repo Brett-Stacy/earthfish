@@ -152,7 +152,8 @@ get_casal_para <- function(para) {
 	datass$estnatM[[1]] <- 0.155
 	datass$estmaturity <- list()
 	datass$estmaturity[[1]] <- c(11, 17)
-	datass$estmaturity[[1]] = c(2, 4) # BS 18/6/19: quick fix to allow function below to accept skipjack LHPs
+	## PB disabled
+	##datass$estmaturity[[1]] = c(2, 4) # BS 18/6/19: quick fix to allow function below to accept skipjack LHPs
 	# "logistic" (x50, x to 95)
 	# "ramp" (low 0, low 1)
 	# "provide" (provide a vector with all values)
