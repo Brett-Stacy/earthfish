@@ -121,9 +121,9 @@ get_om_data <- function(){
 	om$n_fisheries <- length(om$fishery)
 	# Selectivity specification pin
 	om$pin_sel <- list()
-	om$pin_sel[[om$fishery[1]]] <- "dbnormal"
-	om$pin_sel[[om$fishery[2]]] <- "dbnormal"
-	om$pin_sel[[om$fishery[3]]] <- "dbnormal"
+	om$pin_sel[[om$fishery[1]]] <- "double_normal"
+	om$pin_sel[[om$fishery[2]]] <- "double_normal"
+	om$pin_sel[[om$fishery[3]]] <- "double_normal"
 	## selectivity parameters
 	om$select <- list()
 	# params[1]: a = top
