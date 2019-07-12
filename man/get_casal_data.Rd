@@ -4,7 +4,7 @@
 \alias{get_casal_data}
 \title{Get CASAL data}
 \usage{
-get_casal_data(datass, Yr_current, om, sampling, obs, tag, mod)
+get_casal_data(datass, Yr_current, om, ctrl, sampling, obs, tag, mod)
 }
 \arguments{
 \item{datass}{Assessment parameters and data}
