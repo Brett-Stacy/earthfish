@@ -151,7 +151,14 @@ get_casal_para <- function(para) {
 	datass$estnatM <- list()
 	datass$estnatM[[1]] <- 0.155
 	datass$estmaturity <- list()
-	datass$estmaturity[[1]] <- c(11, 17)
+
+	# BS 19/7/19: Accomodate shorter lived species like skipjack tuna:
+	if (datass$ages[length(datass$ages)] > 17){
+	  datass$estmaturity[[1]] = c(11,17)
+	} else{
+	  datass$estmaturity[[1]] = c(3,5)
+	}
+	# datass$estmaturity[[1]] <- c(11, 17)
 	## PB disabled
 	##datass$estmaturity[[1]] = c(2, 4) # BS 18/6/19: quick fix to allow function below to accept skipjack LHPs
 	# "logistic" (x50, x to 95)
