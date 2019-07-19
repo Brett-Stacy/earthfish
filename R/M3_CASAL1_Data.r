@@ -150,13 +150,13 @@ get_casal_para <- function(para) {
 	datass$verify_size_weight <- c(500, 0.5, 1.5) 		# A fish of 500(mm) is between 0.5-1.5 kg
 	datass$estnatM <- list()
 	datass$estnatM[[1]] <- 0.155
-	datass$estmaturity <- list()
+	# datass$estmaturity <- list()
 
-	# BS 19/7/19: Accomodate shorter lived species like skipjack tuna:
+	# BS 19/7/19: Accomodate shorter lived species like skipjack tuna to set up initial para$ass parameter settings:
 	if (datass$ages[length(datass$ages)] > 17){
-	  datass$estmaturity[[1]] = c(11,17)
+	  datass$estmaturity = list("start" = 11, "peak" = 17)
 	} else{
-	  datass$estmaturity[[1]] = c(3,5)
+	  datass$estmaturity = list("start" = 3, "peak" = 5)
 	}
 	# datass$estmaturity[[1]] <- c(11, 17)
 	## PB disabled
@@ -165,9 +165,12 @@ get_casal_para <- function(para) {
 	# "ramp" (low 0, low 1)
 	# "provide" (provide a vector with all values)
 	datass$estpin.mat <- "ramp"
-	if (datass$estpin.mat == "logistic") datass$maturity_props_all <- c("allvalues ",round(ogive_logistic(datass$ages,datass$estmaturity[[1]]),4))
-	if (datass$estpin.mat == "ramp") datass$maturity_props_all <- c("allvalues ",round(ogive_ramp(datass$ages,datass$estmaturity[[1]]),4))
-	if (datass$estpin.mat == "provide") datass$maturity_props_all <- c("allvalues ",round(ogive_provide(datass$ages,datass$estmaturity[[1]]),4))
+	# BS 19/7/19: update to new ogive function:
+	datass$maturity_props_all <- c("allvalues ", round(ogive(datass$estpin.mat, datass$ages, datass$estmaturity), 4))
+
+	# if (datass$estpin.mat == "logistic") datass$maturity_props_all <- c("allvalues ",round(ogive_logistic(datass$ages,datass$estmaturity[[1]]),4))
+	# if (datass$estpin.mat == "ramp") datass$maturity_props_all <- c("allvalues ",round(ogive_ramp(datass$ages,datass$estmaturity[[1]]),4))
+	# if (datass$estpin.mat == "provide") datass$maturity_props_all <- c("allvalues ",round(ogive_provide(datass$ages,datass$estmaturity[[1]]),4))
 	# datass$maturity_props_all		<- "allvalues_bounded 11 17  0.0  0.16 0.31 0.5000 0.69 0.84 1.0000"
 	# maturity_props_female			<- "female allvalues_bounded 11 17  0.0  0.16 0.31 0.5000 0.69 0.84 1.0000"
 	# maturity_props_male			<- "male allvalues_bounded   11 17  0.0  0.16 0.31 0.5000 0.69 0.84 1.0000"
