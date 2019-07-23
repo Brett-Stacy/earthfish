@@ -402,20 +402,22 @@ create_casal_file_est <- function(params, casal_path, skel_csl, csl) {
 	estN <- 0
 	# Catchabilities
 	casalest[["q_method"]]$value <- params$q_method		# @q_method nuisance
-	for (ee in 1:length(params$qq_names)) {					#  qq_names hold unique catchability names (<> list_q)
-		estN <- estN + 1
-		estimateN <- paste("estimate[",estN,"]",sep="")
-		casalest[[estimateN]]$command <- "estimate"
-		casalest[[estimateN]]$value <- character(0)
-		casalest[[estimateN]]$parameter <- paste("q[",params$qq_names[ee],"].q",sep="")
-		casalest[[estimateN]]$lower_bound <- params$qqvalues[[ee]][1]
-		casalest[[estimateN]]$upper_bound <- params$qqvalues[[ee]][2]
-		casalest[[estimateN]]$prior <- params$qqvalues[[ee]][3]
-		if (params$qqvalues[[ee]][3] == "lognormal") {
-			casalest[[estimateN]]$mu <- params$qqvalues[[ee]][4]
-			casalest[[estimateN]]$cv <- params$qqvalues[[ee]][5]
-		}
-		casalest[[estimateN]]$phase <- 1
+	if(!is.null(params$qq_names)) {
+	  for (ee in 1:length(params$qq_names)) {					#  qq_names hold unique catchability names (<> list_q)
+	    estN <- estN + 1
+	    estimateN <- paste("estimate[",estN,"]",sep="")
+	    casalest[[estimateN]]$command <- "estimate"
+	    casalest[[estimateN]]$value <- character(0)
+	    casalest[[estimateN]]$parameter <- paste("q[",params$qq_names[ee],"].q",sep="")
+	    casalest[[estimateN]]$lower_bound <- params$qqvalues[[ee]][1]
+	    casalest[[estimateN]]$upper_bound <- params$qqvalues[[ee]][2]
+	    casalest[[estimateN]]$prior <- params$qqvalues[[ee]][3]
+	    if (params$qqvalues[[ee]][3] == "lognormal") {
+	      casalest[[estimateN]]$mu <- params$qqvalues[[ee]][4]
+	      casalest[[estimateN]]$cv <- params$qqvalues[[ee]][5]
+	    }
+	    casalest[[estimateN]]$phase <- 1
+	  }
 	}
 	#### Estimation for free parameters
 	for (ll in 1:4) {
