@@ -504,8 +504,7 @@ create_casal_file_est <- function(params, casal_path, skel_csl, csl) {
 	  }
 	}
 	## Migration
-	##** add if(n_migrations>0)...
-	if(params$migration_est_pin	== TRUE) {
+	if(params$migration_est_pin==TRUE & params$n_migrations>0) {
 		for (ee in 1:length(params$migration_names)) {
 			estN <- estN + 1
 			estimateN <- paste("estimate[",estN,"]",sep="")
