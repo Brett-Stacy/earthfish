@@ -26,7 +26,7 @@ check_match = function(para){
   ifelse(identical(unname(unlist(para$om$WL[[1]])), para$ass$estWL[[1]]), print("WL match"), print("WL mismatch"))
 
   ifelse(identical(para$om$pin_mat, para$ass$estpin.mat), print("maturity ogive match"), print("maturity ogive mismatch"))
-  ifelse(identical(para$om$maturity[[1]], para$ass$estmaturity), print("maturity match"), print("maturity mismatch"))
+  ifelse(identical(unlist(para$om$maturity[[1]], use.names = F), unlist(para$ass$estmaturity)), print("maturity match"), print("maturity mismatch"))
   ifelse(identical(c("allvalues ", round(ogive(para$om$pin_mat, para$om$ages, para$om$maturity[[1]]), 4)),
                    para$ass$maturity_props_all), print("maturity props match"), print("maturity props mismatch"))
 
