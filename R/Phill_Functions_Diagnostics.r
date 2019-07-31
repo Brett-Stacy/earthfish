@@ -1,12 +1,12 @@
 
 
-##################################################################################
+################################################################################ ##
 
 
 
 
 
-	################################################################################
+	############################################################################## ##
 	#### Plot observed and fitted observations
 
 	#res_fits		<- extract.fits(file=paste(rootdir,outputprefix,"output.log",sep=""), path="")
@@ -32,7 +32,7 @@ unpaste <- function (str, sep = "/") {
 		ans
 	}
 
-	#####################################
+	################################### ##
 	#### Bubble plots of age observations
 #' Bubble plots of age observations
 #'
@@ -103,7 +103,7 @@ plot_YCS_bubbles <- function(est_file, casal_path, yline, dat_name) {
 	}
 
 
-	###########################################################################
+	######################################################################### ##
 #' Plot fits survey
 #'
 #' Needs
@@ -422,7 +422,7 @@ boxplot_fits_age <- function(dat,dat_name,ylab,mcmcdat=NULL) {
 		}
 
 		## Plot
-		par(windows(width=8,height=8))
+		# par(windows(width=8,height=8)) # BS 1/8/19: commented out
 		par(mfrow=c(2,ceiling(length(dat_name)/2)))
 
 		for (i in 1: length(dat_name)) {
@@ -606,7 +606,7 @@ plot_diagnostics_year_by_age <- function(dat, dat_name, trans = rep(identity, le
 
 
 
-	###### TAG DATA FITS ##################
+	###### TAG DATA FITS ################ ##
 	#### Plot tag-recapture fits (by release year, recapture year and length bin)
 #' Plot tag-recapture fits (by release year, recapture year and length bin)
 #'
@@ -1065,7 +1065,7 @@ plot_fits_tags_MedianL_area <- function (dat, plotdims=c(12,12),casal_path,runN)
 
 
 
-	############################################################
+	########################################################## ##
 	#### Extra plots
 	## Population numbers-at-age
 #' Population numbers-at-age
@@ -1280,7 +1280,7 @@ calc_SSB_by_region	<- function(casal_path,pop_csl,res_quant) {
 
 
 
-	############################################################################
+	########################################################################## ##
 	####   2. CASAL.proj_boxplot
 
 #' CASAK boxplot
