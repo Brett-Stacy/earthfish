@@ -734,7 +734,7 @@ plot_fits_tags_area <- function (dat, plotdims=c(12,12),casal_path,runN) {
 				mtext("Releases",   side=2, line=5, font=2, outer=TRUE)
 				mtext("Recaptures", side=3, line=2, font=2, outer=TRUE)
 				mtext("Length(mm)", side=1, line=3, font=2, outer=TRUE)
-				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=TRUE, line=4, ,cex=1.5,font=2)
+				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=TRUE, line=4, cex=1.5, font=2)
 				savePlot(filename = paste(casal_path,runN,"_Plot Fits Tag ByLength ",rela[ll],"to",reca[cc],".png",sep=""),type = "png")
 			}
 		}
@@ -841,7 +841,7 @@ plot_fits_tagN_area <- function (dat,plotdims=c(8,8),casal_path,runN) {
 					}
 					mtext(paste("Release year: ",Ntagy[y],sep=""), side=3, line=0.5, font=2)
 				}
-				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=T, line=-1, ,cex=1.5,font=2)
+				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=T, line=-1, cex=1.5, font=2)
 				savePlot(filename = paste(casal_path,runN,"_Plot Fits Tag Numbers ",rela[ll],"to",reca[cc],".png",sep=""),type = "png")
 			}
 		}
@@ -941,7 +941,7 @@ plot_fits_tags_Exp_Obs_area <- function (dat,plotdims=c(9,6),casal_path,runN) {
 				plot(y=rep(0,length(ally)),x=ally,type="l",lty=1,lwd=1,col=c("grey"),ylim=ylims,font.lab=2,xaxt="n",
 						xlab='Year of recapture',ylab='Expected minus observed recaptures')
 				axis(1,at=ally,labels=ally)
-				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=F, line=1, ,cex=1,font=2)
+				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=F, line=1, cex=1, font=2)
 				for (y in Ntagy) {
 					d1 <- tagfits1[tagfits1$tagy==y,]
 					if(nrow(d1)>0) {
@@ -1057,7 +1057,7 @@ plot_fits_tags_MedianL_area <- function (dat, plotdims=c(12,12),casal_path,runN)
 				}
 				mtext(paste("Release year: ",Ntagy[y],sep=""), side=3, line=0.5, font=2)
 				}
-				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=T, line=-1, ,cex=1.5,font=2)
+				mtext(paste(rela[ll]," to ",reca[cc],sep=""), side=3, outer=T, line=-1, cex=1.5, font=2)
 				savePlot(filename = paste(casal_path,runN,"_Plot Fits Tag MedianLength ",rela[ll],"to",reca[cc],".png",sep=""),type = "png")
 			}
 		}
@@ -1283,16 +1283,16 @@ calc_SSB_by_region	<- function(casal_path,pop_csl,res_quant) {
 	########################################################################## ##
 	####   2. CASAL.proj_boxplot
 
-#' CASAK boxplot
+#' CASAL boxplot
 #'
 #' Needs
 #'
 #' This function needs a description.
-#' @param Plot_mat
-#' @param YearRange
-#' @param Ylimits
-#' @param ablines_h
-#' @param XYlabels
+#' @param Plot_mat Input data matrix with rows = trials & cols = years
+#' @param YearRange First and last years of time seriesc - (yr_first,yr_last)
+#' @param Ylimits Y-axis limits - c(Ymin,Ymax)
+#' @param ablines_h Vector for horizontal lines - c(line1,line2...)
+#' @param XYlabels Axes labels - c(Xlabel,Ylabel)
 #' @param current_y
 #' @export
 	CASAL_box	<- function(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels, current_y="") {
