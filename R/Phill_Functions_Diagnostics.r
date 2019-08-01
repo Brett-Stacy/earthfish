@@ -478,7 +478,7 @@ plot_residuals <- function(dat, dat_name, ylab, plotdims=c(8,8)) {
 		dat_name 	<- as.vector(unique(allobs$Fishery))
 
 		# Plot
-		par(windows(width=plotdims[1],height=plotdims[2]))
+		# par(windows(width=plotdims[1],height=plotdims[2]))  # BS 1/8/19: commented out
 		par(mfrow=c(1,1))
 		if(length(dat_name)>1) par(mfrow=c(1,2))
 		par(mar=c(4,4,2,1))		# inner figure margins
