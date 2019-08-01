@@ -16,6 +16,7 @@
 #' para = get_casal_para(para)
 #' check_match(para)
 check_match = function(para){
+  print("##### POPULATION ####")
   ifelse(identical(para$om$age, para$ass$age), print("age match"), print("age mismatch"))
   ifelse(identical(para$om$ages, para$ass$ages), print("ages match"), print("ages mismatch"))
   ifelse(identical(para$om$n_ages, length(para$ass$ages)), print("n_ages match"), print("n_ages mismatch"))
@@ -34,13 +35,13 @@ check_match = function(para){
 
   ifelse(identical(para$om$rec_h, para$ass$rec_steepness), print("rec_h match"), print("rec_h mismatch"))
 
-  # Tagging
+  print("##### TAGGING ####")
   ifelse(identical(para$sampling$tag_shedding, para$ass$tag_shedding_rate), print("tag shedding match"), print("tag shedding mismatch"))
   ifelse(identical(para$sampling$tag_mort, para$ass$tag_mortality), print("tag mortality match"), print("tag mortality mismatch"))
 
 
 
-  # Selectivity
+  print("##### SELECTIVITY ####")
   ifelse(all(sapply(list(unname(unlist(para$sampling$tag_select[1])), as.numeric(para$ass$selN_all[[1]][-1])), identical, unname(unlist(para$om$select[1])))),
          print("Selectivity Numbers match"), print("Selectivity Numbers mismatch"))
   ifelse(all(sapply(list(unname(unlist(para$sampling$pin_tag_sel[1])), para$ass$selN_all[[1]][1]), identical, unname(unlist(para$om$pin_sel[1])))),
