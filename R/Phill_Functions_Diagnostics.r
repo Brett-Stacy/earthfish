@@ -423,7 +423,8 @@ boxplot_fits_age <- function(dat,dat_name,ylab,mcmcdat=NULL) {
 
 		## Plot
 		# par(windows(width=8,height=8)) # BS 1/8/19: commented out
-		par(mfrow=c(2,ceiling(length(dat_name)/2)))
+		# par(mfrow=c(2,ceiling(length(dat_name)/2))) # BS 1/8/19: commented out and added below:
+		par(mfrow=c(1,ceiling(length(dat_name)/2)))
 
 		for (i in 1: length(dat_name)) {
 			allobsF		<- allobs[allobs$Fishery==dat_name[i],]
@@ -1295,7 +1296,7 @@ calc_SSB_by_region	<- function(casal_path,pop_csl,res_quant) {
 #' @param XYlabels Axes labels - c(Xlabel,Ylabel)
 #' @param current_y
 #' @export
-	CASAL_box	<- function(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels, current_y="") {
+CASAL_box	<- function(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels, current_y="") {
 		## Create box plots given CASAL output matrix with rows = trials & cols = years
 		## Input parameters:
 		#    Plot_mat      Input data matrix with rows = trials & cols = years
