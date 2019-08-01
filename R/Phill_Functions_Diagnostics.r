@@ -707,7 +707,7 @@ plot_fits_tags_area <- function (dat, plotdims=c(12,12),casal_path,runN) {
 			for (cc in 1:length(reca)){
 				tagfits1	<- tagfits[tagfits[,"relarea"] %in% rela[ll] & tagfits[,"recarea"] %in% reca[cc],]
 
-				par(windows(width=plotdims[1],height=plotdims[2]))
+				# par(windows(width=plotdims[1],height=plotdims[2])) # BS 1/8/19: commented out
 				par(mfrow=c(length(Ntagy),length(Nrecapy)))
 				par(oma=c(4,6,6,1))		# outer margins
 				par(mar=c(0,0,0,0))		# inner figure margins
