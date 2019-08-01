@@ -636,7 +636,7 @@ plot_fits_tags <- function (dat, plotdims=c(12,12)) {
 		Ntagy	<- min(tagfits$tagy):max(tagfits$tagy)
 		Nrecapy	<- min(tagfits$recapy):max(tagfits$recapy)
 
-		par(windows(width=plotdims[1],height=plotdims[2]))
+		# par(windows(width=plotdims[1],height=plotdims[2])) # BS 1/8/19: commented out
 		par(mfrow=c(length(Ntagy),length(Nrecapy)))
 		par(oma=c(2,6,4,1))		# outer margins
 		par(mar=c(0,0,0,0))		# inner figure margins
@@ -766,7 +766,7 @@ plot_fits_tagN <- function (dat,plotdims=c(8,8)) {
 		Ntagy	<- min(tagfits$tagy):max(tagfits$tagy)
 		Nrecapy	<- min(tagfits$recapy):max(tagfits$recapy)
 
-		par(windows(width=plotdims[1],height=plotdims[2]))
+		# par(windows(width=plotdims[1],height=plotdims[2])) # BS 1/8/19: commented out
 		par(mfcol=c(ceiling(length(Ntagy)/2),2))
 		par(oma=c(2,1,1,1))		# outer margins
 		par(mar=c(2,2.5,3,0))		# inner figure margins
@@ -879,7 +879,7 @@ plot_fits_tags_Exp_Obs <- function (dat,plotdims=c(9,6)) {
 		# Colours to use from cyan to blue
 		ramp <- colorRamp(c("cyan", "blue"))
 		cols <- rgb(ramp(seq(0, 1, length = length(Ntagy))), max = 255)
-		par(windows(width=plotdims[1],height=plotdims[2]))
+		# par(windows(width=plotdims[1],height=plotdims[2]))  # BS 1/8/19: commented out
 		par(mfrow=c(1,1))
 		par(mar=c(5,5,3,2))		# inner figure margins
 		ylims	<- c(min(tagfits$diff),max(tagfits$diff))
