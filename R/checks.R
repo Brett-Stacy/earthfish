@@ -26,13 +26,19 @@ check_match = function(para){
   ifelse(identical(unname(unlist(para$om$WL[[1]])), para$ass$estWL[[1]]), print("WL match"), print("WL mismatch"))
 
   ifelse(identical(para$om$pin_mat, para$ass$estpin.mat), print("maturity ogive match"), print("maturity ogive mismatch"))
-  ifelse(identical(unlist(para$om$maturity[[1]], use.names = F), unlist(para$ass$estmaturity)), print("maturity match"), print("maturity mismatch"))
+  ifelse(identical(unlist(para$om$maturity[[1]], use.names = F), unlist(para$ass$estmaturity, use.names = F)), print("maturity match"), print("maturity mismatch"))
   ifelse(identical(c("allvalues ", round(ogive(para$om$pin_mat, para$om$ages, para$om$maturity[[1]]), 4)),
                    para$ass$maturity_props_all), print("maturity props match"), print("maturity props mismatch"))
 
   ifelse(identical(para$om$natM[1], para$ass$estnatM[[1]]), print("natM match"), print("natM mismatch"))
 
   ifelse(identical(para$om$rec_h, para$ass$rec_steepness), print("rec_h match"), print("rec_h mismatch"))
+
+  # Tagging
+  ifelse(identical(para$sampling$tag_shedding, para$ass$tag_shedding_rate), print("tag shedding match"), print("tag shedding mismatch"))
+  ifelse(identical(para$sampling$tag_mort, para$ass$tag_mortality), print("tag mortality match"), print("tag mortality mismatch"))
+
+
 
   # Selectivity
   ifelse(all(sapply(list(unname(unlist(para$sampling$tag_select[1])), as.numeric(para$ass$selN_all[[1]][-1])), identical, unname(unlist(para$om$select[1])))),
