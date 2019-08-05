@@ -600,8 +600,13 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 			if (sum(tag$recaps_len) > 0) {	# If any data in recaps_len
 				Tpool	<- tag$recaps_len[,ryy,,,rr_om,tyy,tr_om,drop=FALSE]
 				# Sum recapture Numbers over by length, year, and sex
-				dat <- round(apply(Tpool,drop=FALSE,c(1,2,3),sum),1)
-				if(datass$by_sex == 0) dat	<- apply(dat,c(1,2),sum)	# Sum over sex
+				dat <- apply(Tpool,drop=FALSE,c(1,2,3),sum) # BS 5/08/19: remove round here
+				if(datass$by_sex == 0){
+				  dat	<- round(apply(dat,c(1,2),sum), 1)	# Sum over sex. # BS 5/08/19: place round here
+				} else{
+				  dat = round(dat, 1) # BS 5/08/19: place round here as well if by_sex == 1
+				}
+
 			}
 			## For Individual tags
 			if (nrow(tag$iTags) > 1) {	# If any data in tag$iTags
