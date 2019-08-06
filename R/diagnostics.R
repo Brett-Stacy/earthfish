@@ -126,7 +126,7 @@ plot_OM_Ages = function(output2, region, skip){
 #' @export
 SSB_err = function(output, type){
   switch(type,
-         initial = {om_output <- output[, grepl("OM_ssb_R1_1990", colnames(output))]/2;
+         initial = {om_output <- output[, grepl("OM_ssb_R1_1990", colnames(output))];
          am_output <- output[, grepl("AM_ssb_1990", colnames(output))]},
 
          current = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))];
@@ -134,7 +134,7 @@ SSB_err = function(output, type){
          am_output <- output[, grepl("AM_ssb_", colnames(output))];
          am_output <- am_output[, ncol(am_output)]},
 
-         status = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))]/(output[, grepl("OM_ssb_R1_1990", colnames(output))]/2);
+         status = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))]/(output[, grepl("OM_ssb_R1_1990", colnames(output))]);
          om_output <- om_output[, ncol(om_output)];
          am_output <- output[, grepl("AM_ssb_", colnames(output))]/output[, grepl("AM_ssb_1990", colnames(output))];
          am_output <- am_output[, ncol(am_output)]})
@@ -161,7 +161,7 @@ SSB_err = function(output, type){
 plot_SSB_err = function(output, type, ...){
 
   switch(type,
-         initial = {om_output <- output[, grepl("OM_ssb0", colnames(output))]/2;
+         initial = {om_output <- output[, grepl("OM_ssb0", colnames(output))];
          am_output <- output[, grepl("AM_ssb0_", colnames(output))]},
 
          current = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))];
@@ -169,7 +169,7 @@ plot_SSB_err = function(output, type, ...){
          am_output <- output[, grepl("AM_ssb_", colnames(output))];
          am_output <- am_output[, ncol(am_output)]},
 
-         status = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))]/(output[, grepl("OM_ssb0", colnames(output))]/2);
+         status = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))]/(output[, grepl("OM_ssb0", colnames(output))]);
          om_output <- om_output[, ncol(om_output)];
          am_output <- output[, grepl("AM_ssb_", colnames(output))]/output[, grepl("AM_ssb0", colnames(output))];
          am_output <- am_output[, ncol(am_output)]})

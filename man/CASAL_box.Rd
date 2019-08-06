@@ -2,10 +2,21 @@
 % Please edit documentation in R/Phill_Functions_Diagnostics.r
 \name{CASAL_box}
 \alias{CASAL_box}
-\title{CASAK boxplot}
+\title{CASAL boxplot}
 \usage{
 CASAL_box(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels,
   current_y = "")
+}
+\arguments{
+\item{Plot_mat}{Input data matrix with rows = trials & cols = years}
+
+\item{YearRange}{First and last years of time seriesc - (yr_first,yr_last)}
+
+\item{Ylimits}{Y-axis limits - c(Ymin,Ymax)}
+
+\item{ablines_h}{Vector for horizontal lines - c(line1,line2...)}
+
+\item{XYlabels}{Axes labels - c(Xlabel,Ylabel)}
 }
 \description{
 Needs
