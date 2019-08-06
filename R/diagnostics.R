@@ -126,17 +126,17 @@ plot_OM_Ages = function(output2, region, skip){
 #' @export
 SSB_err = function(output, type){
   switch(type,
-         initial = {om_output <- output[, grepl("OM_ssb0", colnames(output))]/2;
-         am_output <- output[, grepl("AM_ssb0_", colnames(output))]},
+         initial = {om_output <- output[, grepl("OM_ssb_R1_1990", colnames(output))]/2;
+         am_output <- output[, grepl("AM_ssb_1990", colnames(output))]},
 
          current = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))];
          om_output <- om_output[, ncol(om_output)];
          am_output <- output[, grepl("AM_ssb_", colnames(output))];
          am_output <- am_output[, ncol(am_output)]},
 
-         status = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))]/(output[, grepl("OM_ssb0", colnames(output))]/2);
+         status = {om_output <- output[, grepl("OM_ssb_R1", colnames(output))]/(output[, grepl("OM_ssb_R1_1990", colnames(output))]/2);
          om_output <- om_output[, ncol(om_output)];
-         am_output <- output[, grepl("AM_ssb_", colnames(output))]/output[, grepl("AM_ssb0", colnames(output))];
+         am_output <- output[, grepl("AM_ssb_", colnames(output))]/output[, grepl("AM_ssb_1990", colnames(output))];
          am_output <- am_output[, ncol(am_output)]})
 
   err = (am_output - om_output)/om_output
@@ -181,36 +181,5 @@ plot_SSB_err = function(output, type, ...){
 
 }
 
-# plot_err(output, truth = "OM_ssb0", est = "AM_ssb0", half = "yes")
 
-#' Checks the life history parameters in the operating model
-#'
-#' Compare the specifications of the operating model and assessment model
-#' @param para list of operating model parameters
-#' @export
-check_lhps <- function(para){
-  ifelse(identical(para$om$age, para$ass$age), print("age match"), print("age mismatch"))
-  ifelse(identical(para$om$ages, para$ass$ages), print("ages match"), print("ages mismatch"))
-  ifelse(identical(para$om$n_ages, length(para$ass$ages)), print("n_ages match"), print("n_ages mismatch"))
-  ifelse(identical(para$om$move_rules, para$ass$move_rules), print("move_rules match"), print("move_rules mismatch"))
-
-  ifelse(identical(para$om$growth[[1]], para$ass$estgrowth[[1]]), print("growth match"), print("growth mismatch"))
-
-  ifelse(identical(unname(unlist(para$om$WL[[1]])), para$ass$estWL[[1]]), print("WL match"), print("WL mismatch"))
-
-  ifelse(identical(para$om$pin_mat, para$ass$estpin.mat), print("maturity ogive match"), print("maturity ogive mismatch"))
-  ifelse(identical(unname(unlist(para$om$maturity[[1]])), para$ass$estmaturity[[1]]), print("maturity match"), print("maturity mismatch"))
-  ifelse(identical(c("allvalues ", round(ogive(para$om$pin_mat, para$om$ages, para$om$maturity[[1]]), 4)),
-                   para$ass$maturity_props_all), print("maturity props match"), print("maturity props mismatch"))
-
-  ifelse(identical(para$om$natM[1], para$ass$estnatM[[1]]), print("natM match"), print("natM mismatch"))
-
-  ifelse(identical(para$om$rec_h, para$ass$rec_steepness), print("rec_h match"), print("rec_h mismatch"))
-
-  para$ass$estim_natural_mortality.all # what the heck is this?
-  para$ass$estim_size_at_age.cv
-  para$ass$estim_natural_mortality.ogive_all
-  para$ass$estimate_selectivity
-
-}
 
