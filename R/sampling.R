@@ -156,6 +156,23 @@ sample_ages <- function (agecomp, sampleN, ageing_cv = 0.0) {
 #' @param agecomp Number at age of the sample
 #' @param growth growth parameters
 #' @export
+# sample_lengths <- function (ages1, lenbins, agecomp, growth) {
+#   # Mean length
+#   alk <- calc_VBlen(ages1, agecomp, growth)
+#   # Calculate normal distribution of length by length classes & sum up
+#   res <- vector(mode="numeric", length=length(lenbins))
+#   for (aa in 1:length(agecomp)) {
+#     # SD = Mean * CV, cumulative distribution
+#     res1 <- pnorm(lenbins, mean=alk[aa], sd=alk[aa]*growth[4])
+#     res11 <- res1[1]
+#     res1[1:(length(res1)-1)] <- (res1[2:length(res1)] - res1[1:(length(res1)-1)])
+#     res1[1] <- res1[1] + res11
+#     res1[length(res1)] <- 0
+#     res <- res + res1 * agecomp[aa]
+#   }
+#   #return(round(res,0))
+#   return(res)
+# }
 sample_lengths <- function (ages1, lenbins, agecomp, growth) {
   # Mean length
   alk <- calc_VBlen(ages1, agecomp, growth)
