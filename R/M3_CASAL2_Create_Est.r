@@ -260,7 +260,8 @@ create_casal_file_est <- function(params, casal_path, skel_csl, csl) {
 			casalest[[fisheryN]]$fishery <- params$list_fishery[ff]		# fishery
 			casalest[[fisheryN]]$at_size <- "False"
 			casalest[[fisheryN]]$sexed <- if(params$by_sex == 0) "False" else "True"
-			casalest[[fisheryN]]$sum_to_one <- "False"
+			# casalest[[fisheryN]]$sum_to_one <- "False"
+			casalest[[fisheryN]]$sum_to_one <- "True"
 			casalest[[fisheryN]]$plus_group <- params$age_plus_group
 			casalest[[fisheryN]]$min_class <- params$ages[1]
 			casalest[[fisheryN]]$max_class <- params$ages[trun]
