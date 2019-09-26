@@ -526,6 +526,7 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 		datass$survey_len_var[[fish]][] <- datass$surveylenvar
 	}
 	#### Tag release
+	if(sum(datass$sample_years["tagging",1:ycurr,,drop=FALSE]) > 0){# BS 26/6/19: added conditional statement to only activate tagging loops below if there is tagging in sample_years. Purpose is to get CPUE to work without an error popping up at 1:nrow(tag_names)
 	## Tag-release events (in assessment)
 	ttag <- datass$sample_years["tagging",1:ycurr,,drop=FALSE]
 	tag_names <- NULL
@@ -643,6 +644,7 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 			datass$Rec_data[[revent]] <- dat
 			datass$scannedN[[revent]] <- scannedN
 		}
+	}
 	}
 	# #### Estimation file: Estimated Parameters. BS 17/6/19: don't over-write YCS stuff, enter it according to datass$YCS...
 	# datass$estim_recruitment.YCS[[2]] <- c(rep(0.001, datass$rec_year_range_N),rep(1,length(datass$rec_YCS)-datass$rec_year_range_N))

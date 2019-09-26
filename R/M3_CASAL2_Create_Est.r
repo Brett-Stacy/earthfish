@@ -261,7 +261,7 @@ create_casal_file_est <- function(params, casal_path, skel_csl, csl) {
 			casalest[[fisheryN]]$at_size <- "False"
 			casalest[[fisheryN]]$sexed <- if(params$by_sex == 0) "False" else "True"
 			# casalest[[fisheryN]]$sum_to_one <- "False"
-			casalest[[fisheryN]]$sum_to_one <- "True"
+			casalest[[fisheryN]]$sum_to_one <- "True" # BS 26/9/2019: made this True instead of False because they should sum to one
 			casalest[[fisheryN]]$plus_group <- params$age_plus_group
 			casalest[[fisheryN]]$min_class <- params$ages[1]
 			casalest[[fisheryN]]$max_class <- params$ages[trun]
