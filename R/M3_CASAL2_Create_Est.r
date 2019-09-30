@@ -373,10 +373,14 @@ create_casal_file_est <- function(params, casal_path, skel_csl, csl) {
 				casalest[[tagN]]$plus_group <- params$len_plus_group
 				casalest[[tagN]]$class_mins <- params$class_mins
 				if (params$by_sex == 0) {
-					for (y in 1:length(ryear))
-						casalest[[tagN]][paste("recaptured_",ryear[y],sep="")] <- paste(dat[,y],collapse=" ")
-					for (y in 1:length(ryear))
-						casalest[[tagN]][paste("scanned_",ryear[y],sep="")] <- paste(scannedN[,y],collapse=" ")
+					# for (y in 1:length(ryear))
+					# 	casalest[[tagN]][paste("recaptured_",ryear[y],sep="")] <- paste(dat[,y],collapse=" ")
+					# for (y in 1:length(ryear))
+					# 	casalest[[tagN]][paste("scanned_",ryear[y],sep="")] <- paste(scannedN[,y],collapse=" ")
+				  for (y in 1:length(ryear))
+				    casalest[[tagN]][paste("recaptured_",ryear[y],sep="")] <- paste(scannedN[,y],collapse=" ") # BS 30/9/19: switch recaptured_ and scanned_ as per casal manual
+				  for (y in 1:length(ryear))
+				    casalest[[tagN]][paste("scanned_",ryear[y],sep="")] <- paste(dat[,y],collapse=" ")
 				} else {	# With sex partition
 					for (y in 1:length(ryear)) {
 						casalest[[tagN]][paste("recaptured_female_",ryear[y],sep="")]	<- paste(dat[,y,dimnames(dat)$sex=="f"],collapse=" ")
