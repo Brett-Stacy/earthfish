@@ -558,7 +558,7 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 		# Since the assessment model uses length data, length data is used to extract total numbers tagged
 		# Copy data from first match OM Fishery and region - omfish[1] and omreg[1]
 		# BS 1/10/19: add condition for "age-size" tag capability:
-		if(datass$tag_sampling_type == "size"){
+		if(datass$tag_sampling_type == "size" | datass$tag_sampling_type == "age-size"){
 		  tagNumLen <- obs[[omfish[1]]]$tag_len_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
 		  tagNum <- apply(obs[[omfish[1]]]$tag_len_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
 		  # If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
@@ -573,22 +573,23 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 		  datass$tag_props_all[[fish]] <- sweep(tagNumLen,c(2),tagNum,"/")
 		  datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
 		  # Check: apply(datass$tag_props_all[[fish]],2,sum)
-		} else if (datass$tag_sampling_type == "age-size"){ # BS 1/10/19: add "age-size" capability. this condition will effect pop.csl and value props_all in @tag section by age instead of length
-		  tagNumAge <- obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
-		  tagNum <- apply(obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
-		  # If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
-		  if(length(omfish) > 1) {
-		    for (i in 2:length(omfish)) {
-		      tagNumAge <- tagNumLen + obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
-		      tagNum <- tagNum + apply(obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE],2,sum)			# By year
-		    }
-		  }
-		  # Store data and convert to proportions
-		  datass$tag_numbers[[fish]] <- tagNum
-		  datass$tag_props_all[[fish]] <- sweep(tagNumAge,c(2),tagNum,"/")
-		  datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
-		  # Check: apply(datass$tag_props_all[[fish]],2,sum)
 		}
+		# if (datass$tag_sampling_type == "age-size"){ # BS 1/10/19: add "age-size" capability. this condition will effect pop.csl and value props_all in @tag section by age instead of length
+		#   tagNumAge <- obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
+		#   tagNum <- apply(obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
+		#   # If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
+		#   if(length(omfish) > 1) {
+		#     for (i in 2:length(omfish)) {
+		#       tagNumAge <- tagNumLen + obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
+		#       tagNum <- tagNum + apply(obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE],2,sum)			# By year
+		#     }
+		#   }
+		#   # Store data and convert to proportions
+		#   datass$tag_numbers[[fish]] <- tagNum
+		#   datass$tag_props_all[[fish]] <- sweep(tagNumAge,c(2),tagNum,"/")
+		#   datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
+		#   # Check: apply(datass$tag_props_all[[fish]],2,sum)
+		# }
 
 
 	}

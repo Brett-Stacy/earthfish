@@ -241,7 +241,7 @@ create_casal_file_pop <- function(params, casal_path, skel_csl, csl) {
 				casalpop[[tagN]]$ogive <- params$Fish[params$Fish[,"Fishery"]==tfish,"Sel"]
 				casalpop[[tagN]]$number <- as.vector(round(params$tag_numbers[[tfish]][tyear],0))
 				casalpop[[tagN]]$plus_group <- params$len_plus_group
-				if (datass$tag_sampling_type == "size") casalpop[[tagN]]$class_mins <- params$class_mins # BS 1/10/19: condition on if using size for tags
+				if (datass$tag_sampling_type == "size" | datass$tag_sampling_type == "age-size") casalpop[[tagN]]$class_mins <- params$class_mins # BS 1/10/19: condition on if using size for tags
 				if (params$by_sex == 0) {
 					casalpop[[tagN]]$props_all <- paste(round(props,4),collapse=" ")
 				} else {
