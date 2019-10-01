@@ -297,7 +297,7 @@ get_casal_para <- function(para) {
 	datass$tag_dispersion <- 1.0				# Dispersion term ? for the tag-recap likelihood (which is modified by multiplied by 1/?)
 	datass$tag_do_bootstrap <- "True"			# Print parametric bootstraps (default: true)
 	datass$tag_r <- 1e-11			# Robustification parameter used in binomial likelihood (relevant when fitted prop is close to 1 or 0)
-	datass$tag_sampling_type <- "size"			# Sampling type: size: 	   Length for recaptures and tagged fish
+	datass$tag_sampling_type <- "size"			# Sampling type: size: 	   Length for recaptures and tagged fish. BS 1/10/19: try to add "age-size" capability
 	# size-age: Ages for tagged fish, length for scanned fish (Not implemented!!!!)
 	datass$tag_y_liberty <- 6				# Number of years of liberty after tagging event for which recaptures are included in model
 	#### Estimation file: Parameters
@@ -557,20 +557,40 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 		# The sum of length and age tag_N may not be equal due to rounding when converting ages to lengths.
 		# Since the assessment model uses length data, length data is used to extract total numbers tagged
 		# Copy data from first match OM Fishery and region - omfish[1] and omreg[1]
-		tagNumLen <- obs[[omfish[1]]]$tag_len_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
-		tagNum <- apply(obs[[omfish[1]]]$tag_len_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
-		# If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
-		if(length(omfish) > 1) {
-			for (i in 2:length(omfish)) {
-				tagNumLen <- tagNumLen + obs[[omfish[i]]]$tag_len_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
-				tagNum <- tagNum + apply(obs[[omfish[i]]]$tag_len_n[,,,seas,omreg[i],drop=FALSE],2,sum)			# By year
-			}
+		# BS 1/10/19: add condition for "age-size" tag capability:
+		if(datass$tag_sampling_type == "size"){
+		  tagNumLen <- obs[[omfish[1]]]$tag_len_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
+		  tagNum <- apply(obs[[omfish[1]]]$tag_len_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
+		  # If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
+		  if(length(omfish) > 1) {
+		    for (i in 2:length(omfish)) {
+		      tagNumLen <- tagNumLen + obs[[omfish[i]]]$tag_len_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
+		      tagNum <- tagNum + apply(obs[[omfish[i]]]$tag_len_n[,,,seas,omreg[i],drop=FALSE],2,sum)			# By year
+		    }
+		  }
+		  # Store data and convert to proportions
+		  datass$tag_numbers[[fish]] <- tagNum
+		  datass$tag_props_all[[fish]] <- sweep(tagNumLen,c(2),tagNum,"/")
+		  datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
+		  # Check: apply(datass$tag_props_all[[fish]],2,sum)
+		} else if (datass$tag_sampling_type == "age-size"){ # BS 1/10/19: add "age-size" capability. this condition will effect pop.csl and value props_all in @tag section by age instead of length
+		  tagNumAge <- obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
+		  tagNum <- apply(obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
+		  # If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
+		  if(length(omfish) > 1) {
+		    for (i in 2:length(omfish)) {
+		      tagNumAge <- tagNumLen + obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
+		      tagNum <- tagNum + apply(obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE],2,sum)			# By year
+		    }
+		  }
+		  # Store data and convert to proportions
+		  datass$tag_numbers[[fish]] <- tagNum
+		  datass$tag_props_all[[fish]] <- sweep(tagNumAge,c(2),tagNum,"/")
+		  datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
+		  # Check: apply(datass$tag_props_all[[fish]],2,sum)
 		}
-		# Store data and convert to proportions
-		datass$tag_numbers[[fish]] <- tagNum
-		datass$tag_props_all[[fish]] <- sweep(tagNumLen,c(2),tagNum,"/")
-		datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
-		# Check: apply(datass$tag_props_all[[fish]],2,sum)
+
+
 	}
 	## Tag Recapture data: Recapture by Release area * recapture area
 	# Prepare storage
@@ -598,18 +618,35 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 			# Determine equivalent om regions
 			rr_om	<- unique(datass$match_region["OM",] [datass$match_region["Ass",] %in% datass$regions[rr]])	# Recapture region OM
 			## For Pooled tags
-			if (sum(tag$recaps_len) > 0) {	# If any data in recaps_len
-				Tpool	<- tag$recaps_len[,ryy,,,rr_om,tyy,tr_om,drop=FALSE]
-				# Sum recapture Numbers over by length, year, and sex
-				dat <- apply(Tpool,drop=FALSE,c(1,2,3),sum) # BS 5/08/19: remove round here
-				if(datass$by_sex == 0){
-				  dat	<- round(apply(dat,c(1,2),sum), 1)	# Sum over sex. # BS 5/08/19: place round here
-				} else{
-				  dat = round(dat, 1) # BS 5/08/19: place round here as well if by_sex == 1
-				}
+			# BS 1/10/19: add condition for "age-size" tag capability:
+			if(datass$tag_sampling_type == "size"){
+			  if (sum(tag$recaps_len) > 0) {	# If any data in recaps_len
+			    Tpool	<- tag$recaps_len[,ryy,,,rr_om,tyy,tr_om,drop=FALSE]
+			    # Sum recapture Numbers over by length, year, and sex
+			    dat <- apply(Tpool,drop=FALSE,c(1,2,3),sum) # BS 5/08/19: remove round here
+			    if(datass$by_sex == 0){
+			      dat	<- round(apply(dat,c(1,2),sum), 1)	# Sum over sex. # BS 5/08/19: place round here
+			    } else{
+			      dat = round(dat, 1) # BS 5/08/19: place round here as well if by_sex == 1
+			    }
 
+			  }
+			} else if (datass$tag_sampling_type == "age-size"){ # BS 1/10/19: add "age-size" capability. this condition will effect est.csl by changing recaptured_[year] to number of fish tagged by age instead of length. The scanned_[year] fish must still be in length though.
+			  if (sum(tag$recaps) > 0) {	# If any data in recaps_len
+			    Tpool	<- tag$recaps[,ryy,,,rr_om,tyy,tr_om,drop=FALSE]
+			    # Sum recapture Numbers over by length, year, and sex
+			    dat <- apply(Tpool,drop=FALSE,c(1,2,3),sum) # BS 5/08/19: remove round here
+			    if(datass$by_sex == 0){
+			      dat	<- round(apply(dat,c(1,2),sum), 1)	# Sum over sex. # BS 5/08/19: place round here
+			    } else{
+			      dat = round(dat, 1) # BS 5/08/19: place round here as well if by_sex == 1
+			    }
+
+			  }
 			}
+
 			## For Individual tags
+			# BS 1/10/19: did NOT add condition for "age-size" tag capability here
 			if (nrow(tag$iTags) > 1) {	# If any data in tag$iTags
 				Tind <- tag$iTags[tag$iTags$RelY %in% tyear & tag$iTags$RelArea %in% tr_om & 	# Select tags with F = 1
 									 tag$iTags$LastY %in% ryear & tag$iTags$LastArea %in% rr_om & tag$iTags$F == 1,]
