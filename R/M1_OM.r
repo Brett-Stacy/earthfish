@@ -62,7 +62,9 @@ setup_om_objects <- function(para) {
 											 h_fishery_sum = create_array(om, sampling, type="simple"), # was iniQuant: Sum of harvest rates (summed over fishery): sum(h_fishery) <= h_max
 											 h_max = 0,					# Maximum H allowed in a season and area
 											 landings_n_len	= list(),				# Landing numbers by length and fishery
+											 landings_n_age	= list(),				# Landing numbers by age and fishery. BS 1/10/19: added this to later use in M3_CASAL1_Data.r for "age" tagging capability
 											 landings_n_len_sum = create_array(om, sampling, type="length"), # was iniLenQuant: Landing numbers by length (summed over fishery)
+											 landings_n_age_sum = create_array(om, sampling, type="age"), # Landing numbers by age (summed over fishery). BS 1/10/19: added this to later use in M3_CASAL1_Data.r for "age" tagging capability
 											 real_catch = list(),				# Actual catch, by sex; similar to om$catch, but by sex
 											 obs_catch = list(),				# Will be observed (or reported) catch taken
 											 ##* use 'create_array'
@@ -74,6 +76,7 @@ setup_om_objects <- function(para) {
 		res[["mod"]]$real_catch[[om$fishery[ff]]] <- create_array(om, sampling, type="simple") # was iniQuant
 		res[["mod"]]$obs_catch[[om$fishery[ff]]] <- create_array(om, sampling, type="simple") # was iniQuant
 		res[["mod"]]$landings_n_len[[om$fishery[ff]]] <- create_array(om, sampling, type="length") # was iniLenQuant:
+		res[["mod"]]$landings_n_age[[om$fishery[ff]]] <- create_array(om, sampling, type="age") # BS 1/10/19: added this to later use in M3_CASAL1_Data.r for "age" tagging capability
 	}
 	## Create an object to hold the tagging information
 	res[["tag"]] <- list(tags = create_array(om, sampling, type="tag_age"), # was iniAgeQuantT: N-at-age of fish tagged in an area available to the entire fishery
@@ -460,6 +463,11 @@ run_annual_om <- function(para, res, intern = TRUE) {
 							                                                      om$growth[[om$sex[i]]])
 							mod$landings_n_len_sum[,y,i,ss,rr] <- mod$landings_n_len_sum[,y,i,ss,rr] + mod$landings_n_len[[ff]][,y,i,ss,rr]
 						}
+
+						## # BS 1/10/19: added this to later use in M3_CASAL1_Data.r for "age" tagging capabilityStore catch-at-age by fishery and summed over fisheries in mod as well as fleet above.
+						mod$landings_n_age[[ff]][,y,,ss,rr] <- fleet[[ff]]$landings_n[,y,,ss,rr]
+						mod$landings_n_age_sum[,y,,ss,rr] <- mod$landings_n_age_sum[,y,,ss,rr] + mod$landings_n_age[[ff]][,y,,ss,rr]
+
 						## Actual catch taken using catch-by-age
 						if (length(om$sex)  > 1){
 							fleet[[ff]]$landings[,y,,ss,rr] <- apply(fleet[[ff]]$landings_n[,y,,ss,rr,drop=FALSE] * pop$wt[,y,,ss,rr,drop=FALSE],c(3),sum)
@@ -467,6 +475,7 @@ run_annual_om <- function(para, res, intern = TRUE) {
 						if (length(om$sex) == 1){
 							fleet[[ff]]$landings[,y,,ss,rr] <- sum(fleet[[ff]]$landings_n[,y,,ss,rr] * pop$wt[,y,,ss,rr])
 						}
+
 						# Put back into mod$real_catch (om$catch is intended catch, mod$real_catch is actual catch)
 						mod$real_catch[[ff]][,y,,ss,rr] <- fleet[[ff]]$landings[,y,,ss,rr]
 						## Add observation error for catch:

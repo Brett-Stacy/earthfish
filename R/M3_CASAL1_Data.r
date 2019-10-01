@@ -693,7 +693,7 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 			}
 			# Scanned numbers = Landing numbers by length summed across all fisheries in a region
 			if (datass$tag_sampling_type == "size" | datass$tag_sampling_type == "age-size") scannedN	<- round(apply(mod$landings_n_len_sum[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
-			if (datass$tag_sampling_type == "age") scannedN <- round(apply(fleet$LL1$landings_n[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
+			if (datass$tag_sampling_type == "age") scannedN <- round(apply(mod$landings_n_age_sum[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
 			if (datass$by_sex == 0) scannedN <- apply(scannedN,c(1,2),sum) 	# Sum over sex
 			# BS 1/10/19: Turn prop of tagged fish to 0 only if datass$tag_sampling_type == "size" because it isn't needed for "age-size"
 			if (datass$tag_sampling_type == "size") dat[scannedN==0] <- 0	# Turn prop of tagged fish to 0 for age or length classes in which 0 fish have been scanned
