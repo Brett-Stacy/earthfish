@@ -371,7 +371,7 @@ create_casal_file_est <- function(params, casal_path, skel_csl, csl) {
 				casalest[[tagN]]$sample <- params$tag_sampling_type
 				casalest[[tagN]]$years <- ryear
 				casalest[[tagN]]$plus_group <- params$len_plus_group
-				casalest[[tagN]]$class_mins <- params$class_mins
+				if (datass$tag_sampling_type == "size" | datass$tag_sampling_type == "age-size") casalest[[tagN]]$class_mins <- params$class_mins # BS 1/10/19: condition on if using size for tags
 				if (params$by_sex == 0) {
 					for (y in 1:length(ryear))
 						casalest[[tagN]][paste("recaptured_",ryear[y],sep="")] <- paste(dat[,y],collapse=" ")

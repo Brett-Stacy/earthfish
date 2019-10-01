@@ -574,13 +574,31 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 		  datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
 		  # Check: apply(datass$tag_props_all[[fish]],2,sum)
 		}
+
+		if (datass$tag_sampling_type == "age"){ # BS 1/10/19: add "age" capability. this condition will effect pop.csl and value props_all in @tag section by age instead of length
+		  tagNumAge <- obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
+		  tagNum <- apply(obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
+		  # If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
+		  if(length(omfish) > 1) {
+		    for (i in 2:length(omfish)) {
+		      tagNumAge <- tagNumAge + obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
+		      tagNum <- tagNum + apply(obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE],2,sum)			# By year
+		    }
+		  }
+		  # Store data and convert to proportions
+		  datass$tag_numbers[[fish]] <- tagNum
+		  datass$tag_props_all[[fish]] <- sweep(tagNumAge,c(2),tagNum,"/")
+		  datass$tag_props_all[[fish]][is.na(datass$tag_props_all[[fish]])] <- 0
+		  # Check: apply(datass$tag_props_all[[fish]],2,sum)
+		}
+
 		# if (datass$tag_sampling_type == "age-size"){ # BS 1/10/19: add "age-size" capability. this condition will effect pop.csl and value props_all in @tag section by age instead of length
 		#   tagNumAge <- obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE]		# Sum by assess region
 		#   tagNum <- apply(obs[[omfish[1]]]$tag_age_n[,,,seas,omreg[1],drop=FALSE],2,sum)	# By year
 		#   # If there are more than one OM fishery matching this assessment fishery, add observations from the other OM fisheries
 		#   if(length(omfish) > 1) {
 		#     for (i in 2:length(omfish)) {
-		#       tagNumAge <- tagNumLen + obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
+		#       tagNumAge <- tagNumAge + obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE]		# Sum by assess region
 		#       tagNum <- tagNum + apply(obs[[omfish[i]]]$tag_age_n[,,,seas,omreg[i],drop=FALSE],2,sum)			# By year
 		#     }
 		#   }
@@ -632,7 +650,8 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 			    }
 
 			  }
-			} else if (datass$tag_sampling_type == "age-size"){ # BS 1/10/19: add "age-size" capability. this condition will effect est.csl by changing recaptured_[year] to number of fish tagged by age instead of length. The scanned_[year] fish must still be in length though.
+			}
+			if (datass$tag_sampling_type == "age-size" | datass$tag_sampling_type == "age"){ # BS 1/10/19: add "age-size" and "age" capability. this condition will effect est.csl by changing recaptured_[year] to number of fish tagged by age instead of length. The scanned_[year] fish must still be in length though.
 			  if (sum(tag$recaps) > 0) {	# If any data in recaps_len
 			    Tpool	<- tag$recaps[,ryy,,,rr_om,tyy,tr_om,drop=FALSE]
 			    # Sum recapture Numbers over by length, year, and sex
@@ -673,7 +692,8 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 				if(datass$by_sex == 0) dat	<- apply(dat,c(1,2),sum)
 			}
 			# Scanned numbers = Landing numbers by length summed across all fisheries in a region
-			scannedN		 <- round(apply(mod$landings_n_len_sum[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
+			if (datass$tag_sampling_type == "size" | datass$tag_sampling_type == "age-size") scannedN	<- round(apply(mod$landings_n_len_sum[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
+			if (datass$tag_sampling_type == "age") scannedN <- round(apply(fleet$LL1$landings_n[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
 			if (datass$by_sex == 0) scannedN <- apply(scannedN,c(1,2),sum) 	# Sum over sex
 			# BS 1/10/19: Turn prop of tagged fish to 0 only if datass$tag_sampling_type == "size" because it isn't needed for "age-size"
 			if (datass$tag_sampling_type == "size") dat[scannedN==0] <- 0	# Turn prop of tagged fish to 0 for age or length classes in which 0 fish have been scanned
