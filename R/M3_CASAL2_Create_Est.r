@@ -370,7 +370,7 @@ create_casal_file_est <- function(params, casal_path, skel_csl, csl) {
 				casalest[[tagN]]$detection_probability <- params$tag_detection_probability
 				casalest[[tagN]]$sample <- params$tag_sampling_type
 				casalest[[tagN]]$years <- ryear
-				casalest[[tagN]]$plus_group <- params$len_plus_group
+				if (datass$tag_sampling_type == "size" | datass$tag_sampling_type == "age-size") casalest[[tagN]]$plus_group <- params$len_plus_group # BS 1/10/19: condition on if using age for tags. plus_group = True by default in casal
 				if (datass$tag_sampling_type == "size" | datass$tag_sampling_type == "age-size") casalest[[tagN]]$class_mins <- params$class_mins # BS 1/10/19: condition on if using size for tags
 				if (params$by_sex == 0) {
 					for (y in 1:length(ryear))
