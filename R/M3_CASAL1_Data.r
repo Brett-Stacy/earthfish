@@ -674,7 +674,8 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 			# Scanned numbers = Landing numbers by length summed across all fisheries in a region
 			scannedN		 <- round(apply(mod$landings_n_len_sum[,ryy,,,rr_om,drop=FALSE],c(1,2,3),sum) * datass$tag_proportion_scanned,0)
 			if (datass$by_sex == 0) scannedN <- apply(scannedN,c(1,2),sum) 	# Sum over sex
-			dat[scannedN==0] <- 0	# Turn prop of tagged fish to 0 for age or length classes in which 0 fish have been scanned
+			# BS 1/10/19: Turn prop of tagged fish to 0 only if datass$tag_sampling_type == "size" because it isn't needed for "age-size"
+			if (datass$tag_sampling_type == "size") dat[scannedN==0] <- 0	# Turn prop of tagged fish to 0 for age or length classes in which 0 fish have been scanned
 			# Store name of recapture event and data
 		  revent <- paste(tag_names[ff,"TagName"],"_",datass$regions[rr],sep="")
 			datass$Rec_events <- rbind(datass$Rec_events,c(tag_names[ff,"TagName"],RecName=revent,RecRegion=datass$regions[rr]))
