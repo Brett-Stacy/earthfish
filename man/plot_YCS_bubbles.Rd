@@ -6,6 +6,15 @@
 \usage{
 plot_YCS_bubbles(est_file, casal_path, yline, dat_name)
 }
+\arguments{
+\item{est_file}{description}
+
+\item{casal_path}{description}
+
+\item{yline}{description}
+
+\item{dat_name}{description}
+}
 \description{
 Needs
 }

@@ -7,6 +7,21 @@
 cryptic_Biomass(dat = res_quant, dat_name, ages, WatA, mat, firsty,
   plotdims = c(10, 6))
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{ages}{description}
+
+\item{WatA}{description}
+
+\item{mat}{description}
+
+\item{plotdims}{description}
+
+\item{firstly}{description}
+}
 \description{
 Needs
 }

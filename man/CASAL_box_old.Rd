@@ -7,6 +7,19 @@
 CASAL_box_old(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels,
   current_y = "")
 }
+\arguments{
+\item{Plot_mat}{description}
+
+\item{YearRange}{description}
+
+\item{Ylimits}{description}
+
+\item{ablines_h}{description}
+
+\item{XYlabels}{description}
+
+\item{current_y}{description}
+}
 \description{
 Needs
 }

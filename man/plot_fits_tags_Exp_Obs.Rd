@@ -6,6 +6,11 @@
 \usage{
 plot_fits_tags_Exp_Obs(dat, plotdims = c(9, 6))
 }
+\arguments{
+\item{dat}{description}
+
+\item{plotdims}{description}
+}
 \description{
 Needs
 }

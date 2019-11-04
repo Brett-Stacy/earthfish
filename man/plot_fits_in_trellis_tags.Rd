@@ -6,6 +6,15 @@
 \usage{
 plot_fits_in_trellis_tags(dat, dat_name, xlab, ylab)
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{xlab}{description}
+
+\item{ylab}{description}
+}
 \description{
 Needs
 }

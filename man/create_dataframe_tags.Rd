@@ -6,6 +6,15 @@
 \usage{
 create_dataframe_tags(dat_y, yyear)
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{xlab}{description}
+
+\item{ylab}{description}
+}
 \description{
 Needs
 }

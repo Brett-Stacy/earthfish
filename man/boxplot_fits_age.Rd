@@ -6,6 +6,15 @@
 \usage{
 boxplot_fits_age(dat, dat_name, ylab, mcmcdat = NULL)
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{ylab}{description}
+
+\item{mcmcdat}{description}
+}
 \description{
 Needs
 }

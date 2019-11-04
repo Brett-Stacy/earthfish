@@ -7,6 +7,15 @@
 plot_diagnostics_age_by_year(dat, dat_name, trans = rep(identity,
   length(dat_name)), new_device = FALSE)
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{trans}{description}
+
+\item{new_device}{description}
+}
 \description{
 Each age by year
 }

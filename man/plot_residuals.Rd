@@ -6,6 +6,15 @@
 \usage{
 plot_residuals(dat, dat_name, ylab, plotdims = c(8, 8))
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{ylab}{description}
+
+\item{plotdims}{description}
+}
 \description{
 Needs
 }

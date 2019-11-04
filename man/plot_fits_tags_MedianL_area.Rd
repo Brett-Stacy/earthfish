@@ -6,6 +6,15 @@
 \usage{
 plot_fits_tags_MedianL_area(dat, plotdims = c(12, 12), casal_path, runN)
 }
+\arguments{
+\item{dat}{description}
+
+\item{plotdims}{description}
+
+\item{casal_path}{description}
+
+\item{runN}{description}
+}
 \description{
 Multi-area:
 }

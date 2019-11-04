@@ -6,6 +6,9 @@
 \usage{
 PopN_at_age(dat)
 }
+\arguments{
+\item{dat}{description}
+}
 \description{
 Needs
 }

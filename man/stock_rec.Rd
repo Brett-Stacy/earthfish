@@ -6,6 +6,9 @@
 \usage{
 stock_rec(dat)
 }
+\arguments{
+\item{dat}{description}
+}
 \description{
 Needs
 }

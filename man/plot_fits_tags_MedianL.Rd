@@ -6,6 +6,11 @@
 \usage{
 plot_fits_tags_MedianL(dat, plotdims = c(12, 12))
 }
+\arguments{
+\item{dat}{description}
+
+\item{plotdims}{description}
+}
 \description{
 Needs
 }

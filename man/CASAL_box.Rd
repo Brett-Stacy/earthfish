@@ -17,6 +17,8 @@ CASAL_box(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels,
 \item{ablines_h}{Vector for horizontal lines - c(line1,line2...)}
 
 \item{XYlabels}{Axes labels - c(Xlabel,Ylabel)}
+
+\item{current_y}{description}
 }
 \description{
 Needs

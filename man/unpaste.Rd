@@ -6,6 +6,11 @@
 \usage{
 unpaste(str, sep = "/")
 }
+\arguments{
+\item{str}{description}
+
+\item{sep}{description}
+}
 \description{
 Needs
 }

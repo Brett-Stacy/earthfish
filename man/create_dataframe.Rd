@@ -6,6 +6,13 @@
 \usage{
 create_dataframe(pred, obs, cv)
 }
+\arguments{
+\item{pred}{description}
+
+\item{obs}{description}
+
+\item{cv}{description}
+}
 \description{
 Needs
 }

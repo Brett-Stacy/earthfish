@@ -6,6 +6,17 @@
 \usage{
 plot_fits_in_trellis(dat, dat_name, xlab, ylab, mcmcdat = NULL)
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{xlab}{description}
+
+\item{ylab}{description}
+
+\item{mcmcdat}{description}
+}
 \description{
 Needs
 }

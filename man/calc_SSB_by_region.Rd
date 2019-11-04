@@ -6,6 +6,13 @@
 \usage{
 calc_SSB_by_region(casal_path, pop_csl, res_quant)
 }
+\arguments{
+\item{casal_path}{description}
+
+\item{pop_csl}{description}
+
+\item{res_quant}{description}
+}
 \description{
 Needs
 }

@@ -6,6 +6,15 @@
 \usage{
 plot_fits_tags_Exp_Obs_area(dat, plotdims = c(9, 6), casal_path, runN)
 }
+\arguments{
+\item{dat}{description}
+
+\item{plotdims}{description}
+
+\item{casal_path}{description}
+
+\item{runN}{description}
+}
 \description{
 Multi-area:
 }

@@ -20,8 +20,8 @@
 #' Needs
 #'
 #' This function needs a description.
-#' @param str
-#' @param sep
+#' @param str description
+#' @param sep description
 #' @export
 unpaste <- function (str, sep = "/") {
 		w <- strsplit(str, sep)
@@ -30,7 +30,7 @@ unpaste <- function (str, sep = "/") {
 		ans <- vector("list", nr)
 		for (j in 1:nr) ans[[j]] <- w[j, ]
 		ans
-	}
+}
 
 	################################### ##
 	#### Bubble plots of age observations
@@ -39,10 +39,10 @@ unpaste <- function (str, sep = "/") {
 #' Needs
 #'
 #' This function needs a description.
-#' @param est_file
-#' @param casal_path
-#' @param yline
-#' @param dat_name
+#' @param est_file description
+#' @param casal_path description
+#' @param yline description
+#' @param dat_name description
 #' @export
 plot_YCS_bubbles <- function(est_file, casal_path, yline, dat_name) {
 		dat	<- extract.csl.file(est_file,casal_path)
@@ -109,11 +109,11 @@ plot_YCS_bubbles <- function(est_file, casal_path, yline, dat_name) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param xlab
-#' @param ylab
-#' @param mcmcdat
+#' @param dat description
+#' @param dat_name description
+#' @param xlab description
+#' @param ylab description
+#' @param mcmcdat description
 #' @export
 plot_fits_survey <- function(dat, dat_name, xlab, ylab, mcmcdat=NULL) {
 		obs 	<- dat[[dat_name]]$obs
@@ -164,11 +164,11 @@ plot_fits_survey <- function(dat, dat_name, xlab, ylab, mcmcdat=NULL) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param xlab
-#' @param ylab
-#' @param mcmcdat
+#' @param dat description
+#' @param dat_name description
+#' @param xlab description
+#' @param ylab description
+#' @param mcmcdat description
 #' @export
 plot_fits_survey_biomass <- function(dat,dat_name,xlab,ylab, mcmcdat=NULL) {
 		data_df <- NULL
@@ -258,11 +258,11 @@ plot_fits_survey_biomass <- function(dat,dat_name,xlab,ylab, mcmcdat=NULL) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param xlab
-#' @param ylab
-#' @param mcmcdat
+#' @param dat description
+#' @param dat_name description
+#' @param xlab description
+#' @param ylab description
+#' @param mcmcdat description
 #' @export
 plot_fits_in_trellis <- function(dat, dat_name, xlab, ylab, mcmcdat=NULL) {
 		## Master file to plot MPD data fits in trellis
@@ -332,9 +332,9 @@ plot_fits_in_trellis <- function(dat, dat_name, xlab, ylab, mcmcdat=NULL) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param pred
-#' @param obs
-#' @param cv
+#' @param pred description
+#' @param obs description
+#' @param cv description
 #' @export
 create_dataframe <- function(pred,obs,cv) {
 		## Creates a data frame (suitable format for plotting in trellis)
@@ -360,10 +360,10 @@ create_dataframe <- function(pred,obs,cv) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param ylab
-#' @param mcmcdat
+#' @param dat description
+#' @param dat_name description
+#' @param ylab description
+#' @param mcmcdat description
 #' @export
 boxplot_fits_age <- function(dat,dat_name,ylab,mcmcdat=NULL) {
 		allobs <- NULL; allpred <- NULL
@@ -446,10 +446,10 @@ boxplot_fits_age <- function(dat,dat_name,ylab,mcmcdat=NULL) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param ylab
-#' @param plotdims
+#' @param dat description
+#' @param dat_name description
+#' @param ylab description
+#' @param plotdims description
 #' @export
 plot_residuals <- function(dat, dat_name, ylab, plotdims=c(8,8)) {
 		# Plot Pearson's residuals for length/age composition data
@@ -503,10 +503,10 @@ plot_residuals <- function(dat, dat_name, ylab, plotdims=c(8,8)) {
 #' Each age by year
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param trans
-#' @param new_device
+#' @param dat description
+#' @param dat_name description
+#' @param trans description
+#' @param new_device description
 #' @export
 plot_diagnostics_age_by_year <- function(dat, dat_name, trans = rep(identity, length(dat_name)), new_device=FALSE) 	{
 		names(trans) <- dat_name
@@ -556,10 +556,10 @@ plot_diagnostics_age_by_year <- function(dat, dat_name, trans = rep(identity, le
 #' Each year by age
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param trans
-#' @param new_device
+#' @param dat description
+#' @param dat_name description
+#' @param trans description
+#' @param new_device description
 #' @export
 plot_diagnostics_year_by_age <- function(dat, dat_name, trans = rep(identity, length(dat_name)), new_device=FALSE) 	{
 		names(trans) <- dat_name
@@ -614,8 +614,8 @@ plot_diagnostics_year_by_age <- function(dat, dat_name, trans = rep(identity, le
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
+#' @param dat description
+#' @param plotdims description
 #' @export
 plot_fits_tags <- function (dat, plotdims=c(12,12)) {
 		tagfits <- NULL
@@ -673,10 +673,10 @@ plot_fits_tags <- function (dat, plotdims=c(12,12)) {
 #' Multi-area:
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
-#' @param casal_path
-#' @param runN
+#' @param dat description
+#' @param plotdims description
+#' @param casal_path description
+#' @param runN description
 #' @export
 plot_fits_tags_area <- function (dat, plotdims=c(12,12),casal_path,runN) {
 		tagfits 	<- NULL
@@ -748,8 +748,8 @@ plot_fits_tags_area <- function (dat, plotdims=c(12,12),casal_path,runN) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
+#' @param dat description
+#' @param plotdims description
 #' @export
 plot_fits_tagN <- function (dat,plotdims=c(8,8)) {
 		tagfits <- NULL
@@ -794,10 +794,10 @@ plot_fits_tagN <- function (dat,plotdims=c(8,8)) {
 #' Multi-area:
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
-#' @param casal_path
-#' @param runN
+#' @param dat description
+#' @param plotdims description
+#' @param casal_path description
+#' @param runN description
 #' @export
 plot_fits_tagN_area <- function (dat,plotdims=c(8,8),casal_path,runN) {
 		tagfits 	<- NULL
@@ -857,8 +857,8 @@ plot_fits_tagN_area <- function (dat,plotdims=c(8,8),casal_path,runN) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
+#' @param dat description
+#' @param plotdims description
 #' @export
 plot_fits_tags_Exp_Obs <- function (dat,plotdims=c(9,6)) {
 		tagfits <- NULL
@@ -900,10 +900,10 @@ plot_fits_tags_Exp_Obs <- function (dat,plotdims=c(9,6)) {
 #' Multi-area:
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
-#' @param casal_path
-#' @param runN
+#' @param dat description
+#' @param plotdims description
+#' @param casal_path description
+#' @param runN description
 #' @export
 plot_fits_tags_Exp_Obs_area <- function (dat,plotdims=c(9,6),casal_path,runN) {
 		tagfits 	<- NULL
@@ -960,8 +960,8 @@ plot_fits_tags_Exp_Obs_area <- function (dat,plotdims=c(9,6),casal_path,runN) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
+#' @param dat description
+#' @param plotdims description
 #' @export
 plot_fits_tags_MedianL <- function (dat, plotdims=c(12,12)) {
 		tagfits <- NULL
@@ -1007,10 +1007,10 @@ plot_fits_tags_MedianL <- function (dat, plotdims=c(12,12)) {
 #' Multi-area:
 #'
 #' This function needs a description.
-#' @param dat
-#' @param plotdims
-#' @param casal_path
-#' @param runN
+#' @param dat description
+#' @param plotdims description
+#' @param casal_path description
+#' @param runN description
 #' @export
 plot_fits_tags_MedianL_area <- function (dat, plotdims=c(12,12),casal_path,runN) {
 		tagfits 	<- NULL
@@ -1074,7 +1074,7 @@ plot_fits_tags_MedianL_area <- function (dat, plotdims=c(12,12),casal_path,runN)
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
+#' @param dat description
 #' @export
 PopN_at_age <- function(dat) {
 		natage		<- dat$Numbers_at_age
@@ -1099,7 +1099,7 @@ PopN_at_age <- function(dat) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
+#' @param dat description
 #' @export
 stock_rec <- function(dat) {
 		SSB 		<- dat$SSBs
@@ -1124,13 +1124,13 @@ stock_rec <- function(dat) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param ages
-#' @param WatA
-#' @param mat
-#' @param firstly
-#' @param plotdims
+#' @param dat description
+#' @param dat_name description
+#' @param ages description
+#' @param WatA description
+#' @param mat description
+#' @param firstly description
+#' @param plotdims description
 #' @export
 cryptic_Biomass <- function(dat=res_quant, dat_name, ages, WatA, mat, firsty, plotdims=c(10,6)) {
 		# dat 		<- res_quant
@@ -1212,9 +1212,9 @@ cryptic_Biomass <- function(dat=res_quant, dat_name, ages, WatA, mat, firsty, pl
 #' Needs
 #'
 #' This function needs a description.
-#' @param casal_path
-#' @param pop_csl
-#' @param res_quant
+#' @param casal_path description
+#' @param pop_csl description
+#' @param res_quant description
 #' @export
 calc_SSB_by_region	<- function(casal_path,pop_csl,res_quant) {
 		## Calculate SSB by regions from numbers at age, maturity-at-age, length-at-age and length-weight
@@ -1294,7 +1294,7 @@ calc_SSB_by_region	<- function(casal_path,pop_csl,res_quant) {
 #' @param Ylimits Y-axis limits - c(Ymin,Ymax)
 #' @param ablines_h Vector for horizontal lines - c(line1,line2...)
 #' @param XYlabels Axes labels - c(Xlabel,Ylabel)
-#' @param current_y
+#' @param current_y description
 #' @export
 CASAL_box	<- function(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels, current_y="") {
 		## Create box plots given CASAL output matrix with rows = trials & cols = years
@@ -1328,12 +1328,12 @@ CASAL_box	<- function(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels, current
 #' Needs
 #'
 #' This function needs a description.
-#' @param Plot_mat
-#' @param YearRange
-#' @param Ylimits
-#' @param ablines_h
-#' @param XYlabels
-#' @param current_y
+#' @param Plot_mat description
+#' @param YearRange description
+#' @param Ylimits description
+#' @param ablines_h description
+#' @param XYlabels description
+#' @param current_y description
 #' @export
 CASAL_box_old	<- function(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels, current_y="") {
 						## Boxplot
@@ -1391,11 +1391,11 @@ CASAL_box_old	<- function(Plot_mat, YearRange, Ylimits, ablines_h, XYlabels, cur
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param finalyr
-#' @param xlab
-#' @param ylab
+#' @param dat description
+#' @param dat_name description
+#' @param finalyr description
+#' @param xlab description
+#' @param ylab description
 #' @export
 plot_fits_tags_RobScott <- function (dat, dat_name, finalyr, xlab, ylab) {
 
@@ -1448,10 +1448,10 @@ plot_fits_tags_RobScott <- function (dat, dat_name, finalyr, xlab, ylab) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param xlab
-#' @param ylab
+#' @param dat description
+#' @param dat_name description
+#' @param xlab description
+#' @param ylab description
 #' @export
 plot_fits_in_trellis_tags <- function(dat, dat_name, xlab, ylab) {
 						data_df <- NULL
@@ -1481,10 +1481,10 @@ plot_fits_in_trellis_tags <- function(dat, dat_name, xlab, ylab) {
 #' Needs
 #'
 #' This function needs a description.
-#' @param dat
-#' @param dat_name
-#' @param xlab
-#' @param ylab
+#' @param dat description
+#' @param dat_name description
+#' @param xlab description
+#' @param ylab description
 #' @export
 create_dataframe_tags <- function(dat_y,yyear) {
 						dims 	<- dim(dat_y)

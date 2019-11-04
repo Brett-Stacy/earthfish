@@ -6,6 +6,15 @@
 \usage{
 plot_fits_tagN_area(dat, plotdims = c(8, 8), casal_path, runN)
 }
+\arguments{
+\item{dat}{description}
+
+\item{plotdims}{description}
+
+\item{casal_path}{description}
+
+\item{runN}{description}
+}
 \description{
 Multi-area:
 }

@@ -6,6 +6,17 @@
 \usage{
 plot_fits_tags_RobScott(dat, dat_name, finalyr, xlab, ylab)
 }
+\arguments{
+\item{dat}{description}
+
+\item{dat_name}{description}
+
+\item{finalyr}{description}
+
+\item{xlab}{description}
+
+\item{ylab}{description}
+}
 \description{
 Needs
 }
