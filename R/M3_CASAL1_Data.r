@@ -467,8 +467,8 @@ get_casal_data <- function(datass, Yr_current, om, ctrl, sampling, obs, tag, mod
 				datass$catch[[fish]] <- datass$catch[[fish]] + apply(mod$obs_catch[[omfish[i]]][,yrs,,seas,omreg,drop=FALSE],c(1,2,3,4),sum)
 	}
 	# Provide user a warning that all Metiers in the OM are not included in the Assessment
-	if(length(om$fishery) > length(datass$list_fishery))
-		warning(paste("Metiers in OM that are not included in Assessment: ",om$fishery[! om$fishery %in% datass$list_fishery],sep=""))
+	# if(length(om$fishery) > length(datass$list_fishery)) # BS 21/11/19: turn off this warning because it's annoying
+	# 	warning(paste("Metiers in OM that are not included in Assessment: ",om$fishery[! om$fishery %in% datass$list_fishery],sep=""))
 	# print("")
 	# print("Fisheries in OM and Assessment:")
 	# print(datass$Fish)
